@@ -2,7 +2,7 @@ function transformVectors(x, y) {
     let newY = Array(y.length).fill(0);
 
     for (let i = 0; i < x.length; i++) {
-        let clippedY = [];
+        let clippedY = [0];
         for (let j = i; j < x.length; j++) {
             if (j === i) {
                 clippedY.push(y[j]);
@@ -27,7 +27,7 @@ function transformAndPlot() {
         return;
     }
 
-    const xValues = Array.from({ length: 13 }, (_, i) => (i + 1) * 15);
+    const xValues = Array.from({ length: 13 }, (_, i) => (i) * 15);
     const transformedYValues = transformVectors(xValues, yValues);
 
     const ctx = document.getElementById('myChart').getContext('2d');
