@@ -1,24 +1,3 @@
-function transformVectors(x, y) {
-    let newY = Array(y.length).fill(0);
-
-    for (let i = 0; i < x.length; i++) {
-        let clippedY = [];
-        for (let j = i; j < x.length; j++) {
-            if (j === i) {
-                clippedY.push(y[j]);
-            } else {
-                let x1 = x[j - 1], y1 = y[j - 1];
-                let x2 = x[j], y2 = y[j];
-                let yClipped = y1 + (y2 - y1) * (x[i] - x1) / (x2 - x1);
-                clippedY.push(yClipped);
-            }
-        }
-        newY[i] = (y[i] + clippedY.reduce((a, b) => a + b, 0)) / (clippedY.length + 1);
-    }
-
-    return newY;
-}
-
 function transformAndPlot() {
     const yValuesInput = document.getElementById('y-values').value;
     const yValues = yValuesInput.split(',').map(Number);
@@ -27,7 +6,13 @@ function transformAndPlot() {
         return;
     }
 
-    const xValues = Array.from({ length: 12 }, (_, i) => (i + 1) * 15);
+    // Prepend a 0 to the y-values
+    yValues.unshift(0);
+    
+    // Create xValues starting from 0, increasing by 15, ending at 180
+    const xValues = Array.from({ length: 13 }, (_, i) => i * 15);
+    
+    // Transform the y-values, now including the initial zero
     const transformedYValues = transformVectors(xValues, yValues);
 
     const ctx = document.getElementById('myChart').getContext('2d');
