@@ -22,12 +22,12 @@ function transformVectors(x, y) {
 function transformAndPlot() {
     const yValuesInput = document.getElementById('y-values').value;
     const yValues = yValuesInput.split(',').map(Number);
-    if (yValues.length !== 12) {
-        alert('Please enter exactly 12 y-values.');
+    if (yValues.length !== 13) {
+        alert('Please enter exactly 13 y-values.');
         return;
     }
 
-    const xValues = Array.from({ length: 12 }, (_, i) => (i + 1) * 15);
+    const xValues = Array.from({ length: 13 }, (_, i) => (i + 1) * 15);
     const transformedYValues = transformVectors(xValues, yValues);
 
     const ctx = document.getElementById('myChart').getContext('2d');
